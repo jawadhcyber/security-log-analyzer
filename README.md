@@ -1,63 +1,105 @@
+
 Security Log Analyzer
 
-A beginner-friendly Python tool for analyzing security logs and identifying potentially suspicious activity.
+A Python-based security log analyzer designed to identify failed login attempts, suspicious IP addresses, and possible brute-force activity.
+
+This project demonstrates basic SOC Analyst and cybersecurity log-analysis skills.
 
 Features
 
-- Reads security log files
+- Analyzes authentication logs
 - Detects failed login attempts
-- Identifies suspicious IP addresses
-- Counts login failures
-- Generates a simple security analysis report
-- Helps demonstrate basic SOC analyst skills
+- Extracts source IP addresses
+- Counts failed login attempts by IP
+- Detects possible brute-force activity
+- Uses a time-based detection window
+- Assigns LOW, MEDIUM, and HIGH severity levels
+- Handles missing log files
+
+Detection Logic
+
+Failed Login Detection
+
+The analyzer searches the log for failed SSH authentication attempts containing:
+
+Failed password
+
+Brute-Force Detection
+
+The analyzer generates an alert when an IP address produces:
+
+- 5 or more failed attempts
+- Within 1 minute
+
+Severity Levels
+
+Failed Attempts| Severity
+1–4| LOW
+5–9| MEDIUM
+10+| HIGH
 
 Technologies Used
 
 - Python 3
-- Regular Expressions
 - File Handling
-- Basic Log Analysis
+- "collections"
+- "datetime"
+- Log Analysis
+- Basic Threat Detection
 
 Project Structure
 
 Security-Log-Analyzer/
 │
+├── README.md
+├── auth.log
 ├── security_log_analyzer.py
-├── sample.log
-└── README.md
+└── security_log_analyzer_v2.py
 
-How to Run
+Example Output
 
-1. Download or clone this repository.
-2. Open the project folder in a terminal.
-3. Run:
+=== Security Log Analyzer ===
 
-python security_log_analyzer.py
+Failed login attempts by IP:
 
-Example
+192.168.1.10: 5 failed attempts
+  Severity: MEDIUM
+  ALERT: Possible brute-force activity from 192.168.1.10
+  Detection: 5 attempts within 1 minute
 
-The analyzer can identify events such as:
+10.0.0.5: 1 failed attempts
+  Severity: LOW
 
-Failed login attempt
-Suspicious IP address
-Multiple failed login attempts
+How It Works
 
-Cybersecurity Skills Demonstrated
+1. The program opens the authentication log.
+2. It searches for failed password attempts.
+3. It extracts the source IP address.
+4. It counts attempts from each IP.
+5. It assigns a severity level.
+6. It checks whether multiple attempts occurred within the detection window.
+7. It generates an alert for possible brute-force activity.
+
+Skills Demonstrated
 
 - Security log analysis
-- Threat detection
-- Basic incident investigation
+- Authentication-event monitoring
+- IP address analysis
+- Brute-force detection
+- Basic threat detection
 - Python scripting
 - SOC fundamentals
 
 Future Improvements
 
-- Add detection for brute-force attacks
-- Add log severity levels
-- Export reports to CSV
+- Add CSV report generation
+- Add more authentication-event types
+- Add username analysis
+- Add configurable detection thresholds
 - Add a graphical dashboard
-- Support additional log formats
+- Add automated security reports
+- Add support for additional log formats
 
 Disclaimer
 
-This project is created for educational and cybersecurity learning purposes.
+This project is for educational and cybersecurity learning purposes. The included "auth.log" contains sample data created for testing and does not contain real security logs.
