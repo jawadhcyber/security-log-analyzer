@@ -1,50 +1,66 @@
 Security Log Analyzer
 
-A beginner-friendly Python cybersecurity project that analyzes security logs and identifies failed login attempts.
+A beginner-friendly Python cybersecurity project that analyzes authentication logs, detects failed login attempts, identifies possible brute-force activity, and generates a CSV security report.
 
 Features
 
 - Reads security log files
 - Detects failed login attempts
-- Counts failed login events
+- Extracts source IP addresses
+- Counts failed login attempts by IP
+- Detects possible brute-force activity
+- Assigns risk levels: LOW, MEDIUM, and HIGH
 - Generates a security report
 - Exports results to CSV
-- Helps demonstrate basic SOC analyst skills
+- Demonstrates basic SOC analyst skills
 
 Project Files
 
-- "security_log_analyzer.py" — Main Python security log analyzer
-- "auth.log" — Sample security log file
+- "security analyzer.py" — Main Python security log analyzer
+- "auth.log" — Sample authentication security log
 - "security_report.csv" — Generated security analysis report
 
 Example Output
 
-The analyzer checks the log for failed authentication attempts and produces a report containing the detected security events.
+The analyzer checks the authentication log for failed login attempts and groups them by source IP address.
+
+When an IP address reaches 5 or more failed login attempts, the analyzer generates an alert for possible brute-force activity.
+
+The CSV report includes:
+
+- IP Address
+- Failed Attempts
+- Risk Level
+- Status
 
 Skills Demonstrated
 
 - Python
 - Log analysis
-- Cybersecurity fundamentals
 - Authentication monitoring
-- Basic SOC analysis
+- IP address analysis
+- Brute-force detection
 - CSV reporting
+- Cybersecurity fundamentals
+- Basic SOC analysis
 
 How It Works
 
-1. The program reads the security log.
+1. The program reads "auth.log".
 2. It searches for failed login attempts.
-3. Detected events are analyzed.
-4. A security report is generated.
-5. Results are saved as a CSV file.
+3. Source IP addresses are extracted.
+4. Failed attempts are counted by IP.
+5. Risk levels are assigned based on the number of failed attempts.
+6. Possible brute-force activity is identified.
+7. Results are saved to "security_report.csv".
 
 Future Improvements
 
-- Detect suspicious IP addresses
-- Detect brute-force attacks
-- Add IP address analysis
+- Add timestamp analysis
+- Detect additional suspicious authentication patterns
 - Add automatic alerting
 - Build a simple SOC dashboard
+- Support additional log formats
 
 Author
 
