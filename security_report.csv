@@ -1,0 +1,3 @@
+IP Address,Failed Attempts,Severity,Possible Brute Force
+192.168.1.10,5,MEDIUM,YES
+10.0.0.5,1,LOW,NO
