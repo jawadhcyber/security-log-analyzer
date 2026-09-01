@@ -31,24 +31,51 @@ else:
     print()
 
     for ip, count in failed_attempts.items():
-        print(f"{ip}: {count} failed attempts")
 
         if count >= FAILED_LOGIN_THRESHOLD:
+            risk = "HIGH"
+            print(f"{ip}: {count} failed attempts")
             print(f"  ALERT: Possible brute-force activity from {ip}")
+
+        elif count >= 3:
+            risk = "MEDIUM"
+            print(f"{ip}: {count} failed attempts")
+
+        else:
+            risk = "LOW"
+            print(f"{ip}: {count} failed attempts")
 
 # Create security report CSV
 with open(REPORT_FILE, "w", newline="") as csvfile:
     writer = csv.writer(csvfile)
 
-    writer.writerow(["IP Address", "Failed Attempts", "Status"])
+    writer.writerow([
+        "IP Address",
+        "Failed Attempts",
+        "Risk Level",
+        "Status"
+    ])
 
     for ip, count in failed_attempts.items():
+
         if count >= FAILED_LOGIN_THRESHOLD:
+            risk = "HIGH"
             status = "Possible Brute-Force Activity"
+
+        elif count >= 3:
+            risk = "MEDIUM"
+            status = "Monitor"
+
         else:
+            risk = "LOW"
             status = "Normal"
 
-        writer.writerow([ip, count, status])
+        writer.writerow([
+            ip,
+            count,
+            risk,
+            status
+        ])
 
 print()
 print(f"Security report saved to {REPORT_FILE}")
